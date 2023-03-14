@@ -34,15 +34,16 @@ class _DetailsPageState extends State<DetailsPage> {
             ),
           ],
       ),
-      drawer: Drawer(
-         child:DrawerMenu(),
-      ),
+      // drawer: Drawer(
+      //    child:DrawerMenu(),
+      // ),
       body: Center(
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Text(widget.detailTask[0]),
             SizedBox(height: 20,),
-            widget.detailTask[1]? Icon(Icons.check_circle_outline,size: 80,color: Colors.green,):Icon(Icons.cloud_off_rounded,size: 80,color: Colors.red,),
+            widget.detailTask[1]? Icon(Icons.check_circle_outline,size: 80,color: Colors.green,):Icon(Icons.block_sharp,size: 80,color: Colors.red,),
           ],
         ) ,
       ),

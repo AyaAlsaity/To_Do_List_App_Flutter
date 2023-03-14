@@ -9,7 +9,6 @@ import 'package:easy_sidemenu/easy_sidemenu.dart';
 
 import 'details_page.dart';
 
-
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
 
@@ -23,7 +22,6 @@ class _HomePageState extends State<HomePage> {
   ToDoDataBase db = ToDoDataBase();
   //   PageController page = PageController();
   // SideMenuController sideMenu = SideMenuController();
-
 
   @override
   void initState() {
@@ -46,21 +44,19 @@ class _HomePageState extends State<HomePage> {
   void checkBoxChanged(bool? value, int index) {
     setState(() {
       db.toDoList[index][1] = !db.toDoList[index][1];
-      if(db.toDoList[index][1]==true){
+      if (db.toDoList[index][1] == true) {
         saveNewTaskDone(index);
       }
-      
     });
     db.updateDataBase();
   }
 
-    void checkBoxChangedDone(bool? value, int index) {
+  void checkBoxChangedDone(bool? value, int index) {
     setState(() {
       db.toDoListDone[index][1] = !db.toDoListDone[index][1];
-      if(db.toDoListDone[index][1]==false){
+      if (db.toDoListDone[index][1] == false) {
         saveNewTaskNotDone(index);
       }
-      
     });
     db.updateDataBaseDone();
   }
@@ -72,7 +68,8 @@ class _HomePageState extends State<HomePage> {
     });
     db.updateDataBaseDone();
   }
-   void saveNewTaskNotDone(int index) {
+
+  void saveNewTaskNotDone(int index) {
     setState(() {
       db.toDoList.add(db.toDoListDone[index]);
       deleteTaskDone(index);
@@ -110,6 +107,7 @@ class _HomePageState extends State<HomePage> {
     });
     db.updateDataBase();
   }
+
   void deleteTaskDone(int index) {
     setState(() {
       db.toDoListDone.removeAt(index);
@@ -123,89 +121,101 @@ class _HomePageState extends State<HomePage> {
       backgroundColor: Colors.white,
       appBar: AppBar(
         backgroundColor: Colors.deepPurpleAccent.shade100,
-        
-        
-        title:Text(
+        title: Text(
           "To Do List",
-          style:TextStyle(color: Colors.white, fontSize: 20,) ,
+          style: TextStyle(
+            color: Colors.white,
+            fontSize: 20,
           ),
-          centerTitle: true,
-          actions: [
-            Padding(
-              padding: const EdgeInsets.only(right: 27),
-              child: Icon(Icons.person),
-            ),
-          ],
+        ),
+        centerTitle: true,
+        actions: [
+          Padding(
+            padding: const EdgeInsets.only(right: 27),
+            child: Icon(Icons.person),
+          ),
+        ],
       ),
       drawer: Drawer(
-        child:DrawerMenu(),
+        child: DrawerMenu(),
       ),
-       floatingActionButton: FloatingActionButton(
-        backgroundColor:  Colors.deepPurpleAccent.shade100,
+      floatingActionButton: FloatingActionButton(
+        backgroundColor: Colors.deepPurpleAccent.shade100,
         onPressed: createNewTask,
-        child: Icon(Icons.add,),
+        child: Icon(
+          Icons.add,
+        ),
       ),
-      body:DefaultTabController(
+      body: DefaultTabController(
         length: 2,
         child: Column(
           children: [
-             Padding(
-               padding: const EdgeInsets.all(15.0),
-               child: TabBar(
-                indicatorColor:Colors.deepPurpleAccent.shade100,
-                tabs: [
-                Text(
-                   'WAITING',
-                  style:TextStyle(color: Colors.deepPurpleAccent.shade100, fontSize: 17,) ,
-                ),
-                Text(
-                   'Done',
-                   style:TextStyle(color: Colors.deepPurpleAccent.shade100, fontSize: 17,) ,
-                ),
-            ]),
-             ),
+            Padding(
+              padding: const EdgeInsets.all(15.0),
+              child: TabBar(
+                  indicatorColor: Colors.deepPurpleAccent.shade100,
+                  tabs: [
+                    Text(
+                      'WAITING',
+                      style: TextStyle(
+                        color: Colors.deepPurpleAccent.shade100,
+                        fontSize: 17,
+                      ),
+                    ),
+                    Text(
+                      'Done',
+                      style: TextStyle(
+                        color: Colors.deepPurpleAccent.shade100,
+                        fontSize: 17,
+                      ),
+                    ),
+                  ]),
+            ),
             Expanded(
               child: TabBarView(children: [
                 Center(
-                    child:  ListView.builder(
-                      itemCount: db.toDoList.length,
-                      itemBuilder: (context, index) {
-                        return InkWell(
-                          child: ToDoTile(
-                            taskName: db.toDoList[index][0],
-                            taskCompleted: db.toDoList[index][1],
-                            onChanged: (value) => checkBoxChanged(value, index),
-                            deleteFunction: (context) => deleteTask(index),
-                          ),
-                          // onTap: () =>Navigator.of(context).push(DetailsPage(detailTask:db.toDoList[index] ?? ' ',)) ,
-                
-                        );
-                      },
-                    ),
+                  child: ListView.builder(
+                    itemCount: db.toDoList.length,
+                    itemBuilder: (context, index) {
+                      return InkWell(
+                        child: ToDoTile(
+                          taskName: db.toDoList[index][0],
+                          taskCompleted: db.toDoList[index][1],
+                          onChanged: (value) => checkBoxChanged(value, index),
+                          deleteFunction: (context) => deleteTask(index),
+                        ),
+                        onTap: () => Navigator.push(
+                          context,
+                          CupertinoPageRoute(builder: (context) =>DetailsPage(detailTask: db.toDoList[index] ,) ),
+                        ),
+                      );
+                    },
+                  ),
                 ),
-              
                 Center(
-                    child:  ListView.builder(
-        itemCount: db.toDoListDone.length,
-        itemBuilder: (context, index) {
-          return ToDoTile(
-            taskName: db.toDoListDone[index][0],
-            taskCompleted: db.toDoListDone[index][1],
-            onChanged: (value) => checkBoxChangedDone(value, index),
-            deleteFunction: (context) => deleteTaskDone(index),
-          );
-        },
-      ),
+                  child: ListView.builder(
+                    itemCount: db.toDoListDone.length,
+                    itemBuilder: (context, index) {
+                      return InkWell(
+                        child: ToDoTile(
+                          taskName: db.toDoListDone[index][0],
+                          taskCompleted: db.toDoListDone[index][1],
+                          onChanged: (value) => checkBoxChangedDone(value, index),
+                          deleteFunction: (context) => deleteTaskDone(index),
+                        ),
+                         onTap: () => Navigator.push(
+                          context,
+                          CupertinoPageRoute(builder: (context) =>DetailsPage(detailTask: db.toDoListDone[index] ,) ),
+                        ),
+                      );
+                    },
+                  ),
                 ),
-              
               ]),
             ),
-            
           ],
         ),
       ),
-    
     );
   }
 }
-
