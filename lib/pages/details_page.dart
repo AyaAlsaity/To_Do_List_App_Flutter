@@ -1,12 +1,12 @@
-
 import 'package:flutter/material.dart';
 
 import '../module/database.dart';
-import '../subpages/drawer_menu.dart';
-
 
 class DetailsPage extends StatefulWidget {
-  const DetailsPage({super.key, required this.detailTask,});
+  const DetailsPage({
+    super.key,
+    required this.detailTask,
+  });
   // final ToDoDataBase detailTask;
   final List detailTask;
   // final int index;
@@ -23,16 +23,20 @@ class _DetailsPageState extends State<DetailsPage> {
       backgroundColor: Colors.white,
       appBar: AppBar(
         backgroundColor: Colors.deepPurpleAccent.shade100,
-        title:Text(widget.detailTask[0],
-          style:TextStyle(color: Colors.white, fontSize: 20,) ,
+        title: Text(
+          widget.detailTask[0],
+          style: const TextStyle(
+            color: Colors.white,
+            fontSize: 20,
           ),
-          centerTitle: true,
-          actions: [
-            Padding(
-              padding: const EdgeInsets.only(right: 27),
-              child: Icon(Icons.person),
-            ),
-          ],
+        ),
+        centerTitle: true,
+        actions: const [
+          Padding(
+            padding: EdgeInsets.only(right: 27),
+            child: Icon(Icons.person),
+          ),
+        ],
       ),
       // drawer: Drawer(
       //    child:DrawerMenu(),
@@ -42,10 +46,22 @@ class _DetailsPageState extends State<DetailsPage> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Text(widget.detailTask[0]),
-            SizedBox(height: 20,),
-            widget.detailTask[1]? Icon(Icons.check_circle_outline,size: 80,color: Colors.green,):Icon(Icons.block_sharp,size: 80,color: Colors.red,),
+            const SizedBox(
+              height: 20,
+            ),
+            widget.detailTask[1]
+                ? const Icon(
+                    Icons.check_circle_outline,
+                    size: 80,
+                    color: Colors.green,
+                  )
+                : const Icon(
+                    Icons.block_sharp,
+                    size: 80,
+                    color: Colors.red,
+                  ),
           ],
-        ) ,
+        ),
       ),
     );
   }

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 
+// ignore: must_be_immutable
 class ToDoTile extends StatelessWidget {
   final String taskName;
   final bool taskCompleted;
@@ -19,11 +20,11 @@ class ToDoTile extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.only(left: 8, right: 8, top: 15),
-      child: Container(
+      child: SizedBox(
         height: 70,
         child: Slidable(
           endActionPane: ActionPane(
-            motion: StretchMotion(),
+            motion: const StretchMotion(),
             children: [
               SlidableAction(
                 onPressed: deleteFunction,
@@ -34,9 +35,9 @@ class ToDoTile extends StatelessWidget {
             ],
           ),
           child: Container(
-            padding: EdgeInsets.symmetric(vertical: 18,horizontal: 35),
+            padding: const EdgeInsets.symmetric(vertical: 18,horizontal: 35),
             decoration: BoxDecoration(
-              color: Color.fromARGB(156, 180, 136, 255),
+              color: const Color.fromARGB(156, 180, 136, 255),
               borderRadius: BorderRadius.circular(20),
             ),
             child: Row(

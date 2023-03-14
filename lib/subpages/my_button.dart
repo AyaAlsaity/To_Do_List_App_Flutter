@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+// ignore: must_be_immutable
 class MyButton extends StatelessWidget {
   final String text;
   VoidCallback onPressed;
@@ -15,6 +16,7 @@ class MyButton extends StatelessWidget {
       onPressed: onPressed,
       color: Colors.deepPurpleAccent.shade100,
       textColor: Colors.white,
+      // ignore: sort_child_properties_last
       child: Text(text),
        shape: RoundedRectangleBorder(
     side: BorderSide(

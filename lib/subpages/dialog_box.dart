@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 
 import 'my_button.dart';
 
+// ignore: must_be_immutable
 class DialogBox extends StatelessWidget {
+  // ignore: prefer_typing_uninitialized_variables
   final controller;
   VoidCallback onSave;
   VoidCallback onCancel;
@@ -18,6 +20,7 @@ class DialogBox extends StatelessWidget {
   Widget build(BuildContext context) {
     return AlertDialog(
       backgroundColor: Colors.white,
+      // ignore: sized_box_for_whitespace
       content: Container(
         height: 120,
         child: Column(
@@ -26,7 +29,7 @@ class DialogBox extends StatelessWidget {
             // get user input
             TextField(
               controller: controller,
-              decoration: InputDecoration(
+              decoration: const InputDecoration(
                 // fillColor: colors,
                 border: OutlineInputBorder(),
                 hintText: "Add a new task",

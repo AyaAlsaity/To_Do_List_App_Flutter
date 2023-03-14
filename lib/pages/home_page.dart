@@ -121,7 +121,7 @@ class _HomePageState extends State<HomePage> {
       backgroundColor: Colors.white,
       appBar: AppBar(
         backgroundColor: Colors.deepPurpleAccent.shade100,
-        title: Text(
+        title: const Text(
           "To Do List",
           style: TextStyle(
             color: Colors.white,
@@ -129,20 +129,20 @@ class _HomePageState extends State<HomePage> {
           ),
         ),
         centerTitle: true,
-        actions: [
+        actions: const [
           Padding(
-            padding: const EdgeInsets.only(right: 27),
+            padding: EdgeInsets.only(right: 27),
             child: Icon(Icons.person),
           ),
         ],
       ),
-      drawer: Drawer(
+      drawer: const Drawer(
         child: DrawerMenu(),
       ),
       floatingActionButton: FloatingActionButton(
         backgroundColor: Colors.deepPurpleAccent.shade100,
         onPressed: createNewTask,
-        child: Icon(
+        child: const Icon(
           Icons.add,
         ),
       ),
